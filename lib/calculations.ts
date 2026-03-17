@@ -125,7 +125,7 @@ export function calculateTargets(
     rataRataBidOfer: Math.round(rataRataBidOfer),
     a: Math.round(a),
     p: parseFloat(p.toFixed(3)),
-    targetRealistis: Math.round(targetRealistis),
+    targetRealistis1: Math.round(targetRealistis1),
     targetMax: Math.round(targetMax),
     topPersenRealistis: parseFloat(topPersenRealistis.toFixed(1)),
     topPersenMax: parseFloat(topPersenMax.toFixed(1)),
