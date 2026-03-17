@@ -18,6 +18,7 @@ export function getFraksi(harga: number): number {
 /**
  * Calculate target prices based on broker and market data
  */
+/*
 export function calculateTargets(
   rataRataBandar: number,
   barangBandar: number,
@@ -69,5 +70,64 @@ export function calculateTargets(
     targetMax: Math.round(targetMax),
     topPersenRealistis,
     topPersenMax,
+  };
+}*/
+
+export function calculateTargetsRealistis(
+  rataRataBandar: number,
+  barangBandar: number,
+  ara: number,
+  arb: number,
+  totalBid: number,
+  totalOffer: number,
+  harga: number
+) {
+  // Hitung range pasar
+  const marketRange = ara - arb || 1; // hindari 0
+
+  // Fraksi adaptif: semakin besar range, semakin besar fraksi
+  let fraksi = getFraksi(harga);
+  if (marketRange / harga > 0.05) fraksi = Math.max(1, fraksi - 1); // konservatif jika volatil tinggi
+  if (marketRange / harga < 0.02) fraksi = fraksi + 1; // agresif jika volatil rendah
+
+  // Total papan
+  const totalPapan = marketRange / fraksi;
+
+  // Rata-rata bid/offer per papan
+  const rataRataBidOfer = (totalBid + totalOffer) / totalPapan;
+
+  // Adjustment dinamis: 3%–5% dari rata-rata bandar
+  const a = rataRataBandar * (0.03 + Math.min(0.02, marketRange / harga));
+
+  // Ratio p = proporsi barang bandar terhadap total pasar
+  const p = barangBandar / (totalBid + totalOffer);
+
+  // Target Realistis
+  const targetRealistis = rataRataBandar + a + (p * fraksi * 0.5);
+
+  // Target Max
+  const targetMax = rataRataBandar + a + (p * fraksi);
+
+  // Top% (0-100%)
+  const topPersenRealistis = Math.max(
+    0,
+    Math.min(100, ((harga - rataRataBandar) / (targetRealistis - rataRataBandar)) * 100)
+  );
+
+  const topPersenMax = Math.max(
+    0,
+    Math.min(100, ((harga - rataRataBandar) / (targetMax - rataRataBandar)) * 100)
+  );
+
+  return {
+    fraksi,
+    totalPapan: Math.round(totalPapan),
+    rataRataBidOfer: Math.round(rataRataBidOfer),
+    a: Math.round(a),
+    p: parseFloat(p.toFixed(3)),
+    targetRealistis: Math.round(targetRealistis),
+    targetMax: Math.round(targetMax),
+    topPersenRealistis: parseFloat(topPersenRealistis.toFixed(1)),
+    topPersenMax: parseFloat(topPersenMax.toFixed(1)),
   };
 }
