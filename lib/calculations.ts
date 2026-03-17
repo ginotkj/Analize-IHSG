@@ -73,7 +73,7 @@ export function calculateTargets(
   };
 }*/
 
-export function calculateTargetsRealistis(
+export function calculateTargets(
   rataRataBandar: number,
   barangBandar: number,
   ara: number,
