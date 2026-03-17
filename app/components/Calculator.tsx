@@ -421,23 +421,21 @@ export default function Calculator({ selectedStock }: CalculatorProps) {
               <EmitenHistoryCard emiten={result.input.emiten} />
             </div>
 
-            {/* Price Graph + Broker Flow Section */}
+
             <div style={{
               gridColumn: '1 / -1',
-              width: '100%',
-              display: 'flex',
-              gap: '2rem',
-              flexWrap: 'wrap',
-              alignItems: 'stretch'
+              width: '100%'
             }}>
-              <div style={{ flex: '1 1 0', minWidth: '400px' }}>
-                <PriceGraph ticker={result.input.emiten} />
-              </div>
-              <div style={{ flex: '1 1 0', minWidth: '400px', display: 'flex' }}>
-                <BrokerFlowCard emiten={result.input.emiten} />
-              </div>
+              <BrokerFlowCard emiten={result.input.emiten} />
             </div>
-
+            
+            <div style={{
+              gridColumn: '1 / -1',
+              width: '100%'
+            }}>
+              <PriceGraph ticker={result.input.emiten} />
+            </div>
+            
             {/* Agent Story Section - Full Width */}
             <div style={{ gridColumn: '1 / -1', width: '100%' }}>
               {(agentStories.length > 0 || storyStatus !== 'idle') && (
