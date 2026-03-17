@@ -25,7 +25,7 @@ const Navbar = () => {
             </svg>
           </div>
           <div className="navbar-content">
-            <h1 className="navbar-title" style={{ fontSize: '1.5rem', marginBottom: '0' }}>Adimology Calculator</h1>
+            <h1 className="navbar-title" style={{ fontSize: '1.5rem', marginBottom: '0' }}>IHSG Calculator</h1>
             <p className="navbar-subtitle" style={{ fontSize: '0.75rem' }}>Analyze stock targets based on broker summary</p>
           </div>
         </div>
@@ -88,22 +88,6 @@ const Navbar = () => {
             >
               Ranking
             </Link>
-            <a
-              href="https://github.com/bhaktiutama/adimology"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                color: 'var(--text-secondary)',
-                transition: 'color 0.2s',
-                paddingBottom: '2px', // Consistency with nav-links
-              }}
-              className="github-link"
-              title="View on GitHub"
-            >
-              <Github size={20} />
-            </a>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
             <JobStatusIndicator />
