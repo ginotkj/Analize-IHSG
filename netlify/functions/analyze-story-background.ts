@@ -85,7 +85,7 @@ export default async (req: Request) => {
 
     const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     const model = 'gemini-3-flash-preview';
-    const systemPrompt = "Kamu adalah seorang analis saham profesional Indonesia yang ahli dalam menganalisa story dan katalis pergerakan harga saham.";
+    const systemPrompt = "Anda berperan sebagai AI Agent analis saham profesional Indonesia, ahli dalam menganalisis cerita bisnis, aksi korporasi, dan katalis fundamental yang memengaruhi prospek dan pergerakan harga saham, dengan kemampuan menyajikan analisis secara objektif, logis, dan berbasis data terbaru.";
     
     let keyStatsContext = '';
     if (keyStatsData) {
@@ -132,8 +132,8 @@ Berikan analisis dalam format JSON dengan struktur berikut (PASTIKAN HANYA OUTPU
       "stop_loss": "level stop loss"
     }
   },
-  "keystat_signal": "analisis data key statistics dalam bahasa awam dengan indikasi signal investasi",
-  "kesimpulan": "kesimpulan analisis dalam 2-3 kalimat"
+  "keystat_signal": "interpretasi data Key Statistics dalam bahasa awam, menjelaskan kesehatan fundamental perusahaan, tren pertumbuhan, likuiditas, dan profitabilitas, beserta indikasi signal investasi (Positif/Sehat, Neutral, atau Negatif/Hati-hati).",
+  "kesimpulan": "ringkasan analisis 2-3 kalimat yang menyimpulkan prospek emiten, termasuk apakah saham ini layak dipertimbangkan untuk dibeli atau tidak, berdasarkan story bisnis, aksi korporasi, katalis, dan data fundamental."
 }`;
 
     const contents = [
